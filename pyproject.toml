@@ -4,7 +4,15 @@ version = "0.1.0"
 description = "A CrewAI stock analysis portfolio project with validated risk reports"
 readme = "README.md"
 requires-python = ">=3.12,<3.14"
-dependencies = ["crewai==0.152.0", "pydantic>=2.11,<3"]
+dependencies = [
+    "crewai==0.152.0",
+    "fastapi>=0.115,<1",
+    "pydantic>=2.11,<3",
+    "uvicorn>=0.34,<1",
+]
+
+[dependency-groups]
+dev = ["httpx>=0.28,<1"]
 
 [project.scripts]
 stock_analysis = "stock_analysis.main:run"

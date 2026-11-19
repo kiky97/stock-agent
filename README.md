@@ -1,6 +1,6 @@
 # Stock Risk Analyst
 
-A portfolio extension of the official [CrewAI Stock Analysis example](https://github.com/crewAIInc/crewAI-examples/tree/da94a91e691e1cf5b3151416bb15b5b62729bea8/crews/stock_analysis). It preserves the upstream `CrewBase` layout, YAML configuration, and research-to-report workflow, and adds a Risk Analyst and validated JSON reports.
+A portfolio extension of the official [CrewAI Stock Analysis example](https://github.com/crewAIInc/crewAI-examples/tree/da94a91e691e1cf5b3151416bb15b5b62729bea8/crews/stock_analysis). It preserves the upstream `CrewBase` layout, YAML configuration, and research-to-report workflow, and adds a Risk Analyst, validated reports, and a FastAPI interface.
 
 ## Run the demo
 
@@ -17,6 +17,24 @@ uv run --locked python -m unittest discover -s tests -v
 ```
 
 The default mode runs without credentials after dependencies are installed. A deterministic model drives the CrewAI tasks, which call tools backed by six synthetic closes per ticker, mock research notes, and mock SEC filing excerpts. With `OPENAI_API_KEY` set, pass `--openai-model gpt-4.1-mini` to run the same tasks and tools with an OpenAI model.
+
+## Run the FastAPI service
+
+After installing dependencies and setting the demo environment variables above, start Uvicorn.
+
+```bash
+uv run --locked uvicorn stock_analysis.api:app --host 127.0.0.1 --port 8000
+```
+
+Open Swagger UI at `http://127.0.0.1:8000/docs` to try the API. The health endpoint is `GET /health`, and the OpenAPI spec is at `/openapi.json`.
+
+```bash
+curl -X POST http://127.0.0.1:8000/analyze \
+  -H 'Content-Type: application/json' \
+  -d '{"symbol":"NVDA","downside_pct":15}'
+```
+
+The API runs the same offline CrewAI pipeline as the CLI and returns a validated `PortfolioReport`. Supported symbols are AAPL, MSFT, and NVDA. The integer `downside_pct` defaults to 5 and accepts values from 1 to 99. Invalid requests return HTTP 422.
 
 ## How the crew works
 
@@ -42,4 +60,4 @@ The demo rates drawdown below 3% as low, 3% to under 10% as medium, and 10% or a
 
 ## CV bullet
 
-> Extended CrewAI’s official Stock Analysis example with a Risk Analyst agent that grades drawdown risk and models configurable downside scenarios. Enforced Pydantic output contracts and evidence consistency across a four-agent pipeline, and verified JSON and Markdown reporting with offline cases.
+> Extended CrewAI’s official Stock Analysis example with a Risk Analyst agent that grades drawdown risk and models configurable downside scenarios. Enforced Pydantic output contracts and evidence consistency across a four-agent pipeline, and exposed the workflow through a FastAPI endpoint with OpenAPI documentation and request validation.
