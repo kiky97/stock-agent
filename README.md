@@ -36,6 +36,28 @@ curl -X POST http://127.0.0.1:8000/analyze \
 
 The API runs the same offline CrewAI pipeline as the CLI and returns a validated `PortfolioReport`. Supported symbols are AAPL, MSFT, and NVDA. The integer `downside_pct` defaults to 5 and accepts values from 1 to 99. Invalid requests return HTTP 422.
 
+## Review real SEC disclosures
+
+The service includes selected Item 1A excerpts from Apple and Microsoft's FY2023 and FY2024 SEC 10-K filings. Each report includes the EDGAR document URL, fiscal year, risk claims, verbatim quotes, and the review history.
+
+~~~bash
+curl -X POST http://127.0.0.1:8000/filings/analyze \
+  -H 'Content-Type: application/json' \
+  -d '{"symbol":"AAPL","fiscal_year":2024}'
+
+curl -X POST http://127.0.0.1:8000/filings/compare \
+  -H 'Content-Type: application/json' \
+  -d '{"symbol":"MSFT"}'
+~~~
+
+1. The Research Analyst selects relevant categories from the local filing excerpts.
+2. The Risk Analyst drafts one claim and a verbatim quote per selected category. Python checks each quote against its source, allowing whitespace normalization.
+3. A separate Reviewer agent assesses whether the quote supports the claim. Citation failures and reviewer feedback go back to the Risk Analyst for one revision. After a second failure, the API returns an `insufficient_evidence` report with no published findings.
+
+The annual comparison runs both reviews, pairs results by risk category, and labels excerpt wording changes or categories reviewed in only one year. The comparison covers the selected excerpts. It cannot establish that a risk appeared or disappeared across the full filings.
+
+The default `offline_demo` mode uses scripted agent responses with real source excerpts. Apple's sample deliberately starts with an overstatement to demonstrate the review and revision path. To use a language model for selection, drafting, and semantic review, set `OPENAI_API_KEY` and `SEC_ANALYSIS_OPENAI_MODEL=gpt-4.1-mini` before starting Uvicorn. The reports identify the execution mode.
+
 ## How the crew works
 
 | Agent | Task | Input or tool |
@@ -60,4 +82,4 @@ The demo rates drawdown below 3% as low, 3% to under 10% as medium, and 10% or a
 
 ## CV bullet
 
-> Extended CrewAI’s official Stock Analysis example with a Risk Analyst agent that grades drawdown risk and models configurable downside scenarios. Enforced Pydantic output contracts and evidence consistency across a four-agent pipeline, and exposed the workflow through a FastAPI endpoint with OpenAPI documentation and request validation.
+> Extended CrewAI’s official Stock Analysis example with a Risk Analyst agent that grades drawdown risk and models configurable downside scenarios. Enforced Pydantic output contracts and evidence consistency across a four-agent pipeline, and exposed the workflow through FastAPI. Added SEC 10-K risk extraction with verbatim citation checks, a Reviewer agent with bounded revision, and cross-year comparisons.

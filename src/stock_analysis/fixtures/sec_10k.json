@@ -1,0 +1,47 @@
+[
+  {
+    "symbol": "AAPL",
+    "fiscal_year": 2023,
+    "section": "Item 1A. Risk Factors",
+    "source_url": "https://www.sec.gov/Archives/edgar/data/320193/000032019323000106/aapl-20230930.htm",
+    "excerpts": {
+      "competition": "Global markets for the Company’s products and services are highly competitive and subject to rapid technological change, and the Company may be unable to compete effectively in these markets.",
+      "supply_chain": "The Company relies on single-source outsourcing partners in the U.S., Asia and Europe to supply and manufacture many components, and on outsourcing partners primarily located in Asia, for final assembly of substantially all of the Company’s hardware products. Any failure of these partners to perform can have a negative impact on the Company’s cost or supply of components or finished goods.",
+      "cybersecurity": "Losses or unauthorized access to or releases of confidential information, including personal information, could subject the Company to significant reputational, financial, legal and operational consequences."
+    }
+  },
+  {
+    "symbol": "AAPL",
+    "fiscal_year": 2024,
+    "section": "Item 1A. Risk Factors",
+    "source_url": "https://www.sec.gov/Archives/edgar/data/320193/000032019324000123/aapl-20240928.htm",
+    "excerpts": {
+      "competition": "Global markets for the Company’s products and services are highly competitive and subject to rapid technological change, and the Company may be unable to compete effectively in these markets.",
+      "supply_chain": "The Company relies on single-source outsourcing partners in the U.S., Asia and Europe to supply and manufacture many components, and on outsourcing partners primarily located in Asia, for final assembly of substantially all of the Company’s hardware products. Any failure of these partners to perform can have a negative impact on the Company’s cost or supply of components or finished goods.",
+      "cybersecurity": "Losses or unauthorized access to or releases of confidential information, including personal information, could subject the Company to significant reputational, financial, legal and operational consequences."
+    }
+  },
+  {
+    "symbol": "MSFT",
+    "fiscal_year": 2023,
+    "section": "Item 1A. Risk Factors",
+    "source_url": "https://www.sec.gov/Archives/edgar/data/789019/000095017023035122/msft-20230630.htm",
+    "excerpts": {
+      "competition": "We face intense competition across all markets for our products and services, which may lead to lower revenue or operating margins.",
+      "cybersecurity": "Cyberattacks and security vulnerabilities could lead to reduced revenue, increased costs, liability claims, or harm to our reputation or competitive position.",
+      "supply_chain": "There are limited suppliers for certain device and datacenter components. Our competitors use some of the same suppliers and their demand for hardware components can affect the capacity available to us."
+    }
+  },
+  {
+    "symbol": "MSFT",
+    "fiscal_year": 2024,
+    "section": "Item 1A. Risk Factors",
+    "source_url": "https://www.sec.gov/Archives/edgar/data/789019/000095017024087843/msft-20240630.htm",
+    "excerpts": {
+      "competition": "We face intense competition across all markets for our products and services, which may adversely affect our results of operations.",
+      "cybersecurity": "Cyberattacks and security vulnerabilities could lead to reduced revenue, increased costs, liability claims, or harm to our reputation or competitive position.",
+      "supply_chain": "We may experience quality or supply problems. There are limited suppliers for certain device and datacenter components.",
+      "ai": "Issues in the development and use of AI may result in reputational or competitive harm or liability."
+    }
+  }
+]
