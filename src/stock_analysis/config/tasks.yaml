@@ -1,0 +1,28 @@
+research:
+  description: Call get_demo_evidence for {company_stock} with kind research. Copy the tool result exactly.
+  expected_output: An Evidence JSON object for the research note.
+
+financial_analysis:
+  description: Call get_market_snapshot for {company_stock}. Copy the tool result exactly.
+  expected_output: A MarketSnapshot JSON object.
+
+filings_analysis:
+  description: Call get_demo_evidence for {company_stock} with kind filing. Copy the tool result exactly.
+  expected_output: An Evidence JSON object for the synthetic filing excerpt.
+
+risk_analysis:
+  description: >
+    Copy the supplied market snapshot verbatim into market. Assign risk_level high
+    for a max_drawdown_pct of 10 or higher, medium for 3 to below 10, and low below 3.
+    Set downside_pct to {downside_pct}. Calculate stressed_close_usd as the last
+    close times (100 minus downside_pct) divided by 100, rounded to cents.
+    Write two evidence-based risk factors using the market and filing context.
+    State the limitations of using six synthetic closes and a mock filing.
+  expected_output: A RiskReport JSON object.
+
+recommend:
+  description: >
+    Copy the research Evidence into research, the filing Evidence into filing,
+    and the complete RiskReport into risk. Preserve all nested fields and values.
+    Write a short summary of what the synthetic data shows and which risk to monitor.
+  expected_output: A PortfolioReport JSON object.

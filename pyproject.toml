@@ -1,0 +1,17 @@
+[project]
+name = "stock-risk-portfolio"
+version = "0.1.0"
+description = "A CrewAI stock analysis portfolio project with validated risk reports"
+readme = "README.md"
+requires-python = ">=3.12,<3.14"
+dependencies = ["crewai==0.152.0", "pydantic>=2.11,<3"]
+
+[project.scripts]
+stock_analysis = "stock_analysis.main:run"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/stock_analysis"]
